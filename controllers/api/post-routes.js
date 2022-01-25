@@ -5,14 +5,14 @@ const { Post, User, Like, Comment} = require('../../models');
 // GET /api/posts
 router.get('/', (req, res) => {
   Post.findAll({
-    order: [['created_at', 'DESC']],
     attributes: [
       'id',
       'post_url',
       'title',
       'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
+     
     ],
+    order: [['created_at', 'DESC']],
     include: [
       {
         model: Comment,
@@ -28,6 +28,11 @@ router.get('/', (req, res) => {
       }
     ]
    })
+   .then(postData => res.json(postData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 
 });
 
@@ -45,6 +50,14 @@ router.get('/:id', (req, res) => {
       [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
     ],
     include: [
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
       {
         model: User,
         attributes: ['username']
@@ -75,7 +88,7 @@ router.post('/', (req, res) => {
 // PUT /api/posts/likeed
 router.put('/liked', (req, res) => {
   // custom static method created in models/Post.js
-  Post.liked(req.body, { Like })
+  Post.liked(req.body, { Like, Comment, User })
     .then(updatedPostData => res.json(updatedPostData))
     .catch(err => {
       console.log(err);
@@ -95,7 +108,7 @@ router.put('/:id', (req, res) => {
   })
     .then(postData => {
       if (!postData[0]) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No post found with this id' });
         return;
       }
       res.json(postData);
@@ -115,7 +128,7 @@ router.delete('/:id', (req, res) => {
   })
     .then(postData => {
       if (!postData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No post found with this id' });
         return;
       }
       res.json(postData);
