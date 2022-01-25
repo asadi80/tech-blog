@@ -1,70 +1,74 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Post,User } = require('../../models');
 
-// GET /api/users
+// GET /api/posts
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method)
-    User.findAll({
-        attributes: { exclude: ['password'] }
-      })
-        .then(userData => res.json(userData))
-        .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-        });
-  });
-
-// GET /api/users/by id
-router.get('/:id', (req, res) => {
-    User.findOne({
-    attributes: { exclude: ['password'] },
-      where: {
-        id: req.params.id
-      }
-    })
-      .then(userData => {
-        if (!userData) {
-          res.status(404).json({ message: 'No user found with this id' });
-          return;
+   
+    Post.findAll({
+      attributes: ['id', 'post_url', 'title', 'created_at'],
+      order: [['created_at', 'DESC']], 
+      include: [
+        {
+          model: User,
+          attributes: ['username']
         }
-        res.json(userData);
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
-// POST /api/users
-router.post('/', (req, res) => {
-    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-    User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
+      ]
     })
-      .then(userData => res.json(userData))
+      .then(postData => res.json(postData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
       });
   });
 
-// PUT /api/users/1
+// GET /api/posts/by id
+router.get('/:id', (req, res) => {
+    Post.findOne({
+      attributes: ['id', 'post_url', 'title', 'created_at'],
+      include: [
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    })
+      .then(postData => res.json(postData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+// POST /api/posts
+router.post('/', (req, res) => {
+    // expects {title: 'Lernantino', post_url: 'www.uc.com',user_id:number}
+    Post.create({
+      title: req.body.title,
+      post_url: req.body.post_url,
+      user_id:req.body.user_id,
+    })
+      .then(postData => res.json(postData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
+// PUT /api/posts/1
 router.put('/:id', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
-    User.update(req.body, {
+    Post.update(req.body, {
       where: {
         id: req.params.id
       }
     })
-      .then(userData => {
-        if (!userData[0]) {
+      .then(postData => {
+        if (!postData[0]) {
           res.status(404).json({ message: 'No user found with this id' });
           return;
         }
-        res.json(userData);
+        res.json(postData);
       })
       .catch(err => {
         console.log(err);
@@ -72,19 +76,19 @@ router.put('/:id', (req, res) => {
       });
   });
 
-// DELETE /api/users/1
+// DELETE /api/posts/1
 router.delete('/:id', (req, res) => {
-    User.destroy({
+    Post.destroy({
       where: {
         id: req.params.id
       }
     })
-      .then(userData => {
-        if (!userData) {
+      .then(postData => {
+        if (!postData) {
           res.status(404).json({ message: 'No user found with this id' });
           return;
         }
-        res.json(userData);
+        res.json(postData);
       })
       .catch(err => {
         console.log(err);
