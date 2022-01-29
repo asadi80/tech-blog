@@ -21,24 +21,26 @@
       <header>
         <nav class="navbar navbar-light bg-light" style="margin-bottom:30px ;">
           <div class="container-fluid">
-            <h1>
-              <a href="/" style=" font-family: 'Nova Square', cursive;">Tech
-                Blog</a>
+            <h1  class="btn btn-outline-info" style=" font-family: 'Nova Square', cursive; width: 300px;   font-size: 35px;">
+             <a href="/" class=" btn-outline-info">Tech Blog</a> 
             </h1>
             <form class="d-flex">
+              <a href="/" class="btn btn-outline-info" style=" font-family: 'Nova Square', cursive; margin-right:5px ;">Home</a>
               {{#if loggedIn}}
+              <button class="btn btn-outline-info">Welcome, {{user.username}}</button>
                 <a
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-info"
                   style="margin-right:5px ;"
                   href="/dashboard"
                 >dashboard</a>
+                
                 <button
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-info"
                   id="logout"
                   class="btn-no-style"
                 >logout</button>
               {{else}}
-                <a href="/login" class="btn btn-outline-primary">login</a>
+                <a href="/login" class="btn btn-outline-info">login</a>
               {{/if}}
             </form>
           </div>
@@ -49,8 +51,11 @@
         {{{body}}}
 
       </main>
-      <footer class="bg-light">
-        <p><i class="fab fa-facebook-f"></i>Facebook</p>
+      <footer class="bg-info">
+        <div class="img">
+        <a href="https://github.com/asadi80" target="_blank" > <img src="/image/github-logo-thin.png" width="50px" alt=""></a>
+        <a href="https://www.linkedin.com/in/abdurraouf-sadi/" target="_blank"><img src="/image/linkedin-logo-thin.png" width="50px" alt=""></a>
+        </div>
       </footer>
 
     </div>

@@ -1,42 +1,53 @@
-
+<section>
 <div class="container">
   <div class="row justify-content-md-center">
-<div class="card shadow-sm p-3 mb-5 bg-body rounded border-info mb-3" style="max-width: 40rem; margin-left:20px;">
-  <div class="card-header"><h2>Create New Post</h2></div>
-  <div class="card-body">
-   <form class="new-post-form">
-    <div>
-      <label for="post-title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="post-title" name="post-title" />
-    </div>
-    <div>
-      <label for="content" class="form-label">Content</label>
-     
-
-    <textarea class="form-control" placeholder="" id="floatingTextarea" name="content"></textarea>
- 
-
-
-    </div>
-    <button type="submit" class="btn btn-outline-primary mt-3 bottom-0 end-0">Create</button>
-  </form>
-  </div>
-</div>
-</div>
-
-{{#if posts.length}}
-<section>
-  <h2 style="text-align: center;">Your Posts</h2>
-  <ul>
-    {{#each posts as |post|}}
-    <li>
-      <div>
-      {{> post-info post}}
-      <a href="/dashboard/edit/{{post.id}}" >Edit post</a>
+    <div class="card shadow-sm p-3 mb-5 bg-body rounded border-info mb-3" style="max-width: 40rem; margin-left:20px;">
+      <div class="card-header">
+        <h2>Create New Post</h2>
       </div>
-    </li>
-    {{/each}}
-  </ul>
+      <div class="card-body">
+        <form class="new-post-form">
+          <div>
+            <label for="post-title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="post-title" name="post-title" />
+          </div>
+          <div>
+            <label for="content" class="form-label">Content</label>
+            <textarea class="form-control" placeholder="" id="floatingTextarea" name="content"></textarea>
+          </div>
+          <button type="submit" class="btn btn-outline-info mt-3 bottom-0 end-0">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+  {{#if posts.length}}
+  <section>
+    <h2 style="text-align: center;">Your Posts</h2>
+    <ul style="padding: 0px;">
+      {{#each posts as |post|}}
+      <li>
+        <div>
+          <div class="container ">
+            <div class="row justify-content-md-center">
+            <div class="card shadow-sm p-3 mb-1 bg-body rounded border-info" style=" margin-top:5px ;">
+              <div class="card-header">
+
+                <a href="/post/{{id}}">{{title}}</a>
+                <p class="card-text">Posted by {{user.username}} on {{format_date created_at}}
+              </div>
+              <div class="card-body ">
+                <h5 class="card-title">{{content}}</a></h5>
+                {{comments.length}} comment(s) {{like_count.length}} <a href="/dashboard/edit/{{post.id}}">Edit post</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</li>
+{{/each}}
+</ul>
 </section>
 {{/if}}
 

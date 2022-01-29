@@ -1,21 +1,20 @@
-<div class="container ">
-  <div class="row justify-content-md-center"></div>
-  <div class="card shadow-sm p-3 mb-1 bg-body rounded" style=" margin-top:5px ;">
-    <div class="card-header">
-     
-      <a href="/post/{{id}}">{{title}}</a>
-    </div>
-    <div class="card-body ">
-      <h5 class="card-title">{{content}}</a></h5>
-      <p class="card-text">Posted by {{user.username}} on {{format_date created_at}}
-     {{comments.length}} comment(s)  {{like_count.length}}
-      </p>
+<section>
+  <div class="container ">
+    <div class="row justify-content-md-center">
+    <div class="card shadow-sm p-3 mb-1 bg-body rounded border-info" style=" margin-top:5px ;">
+      <div class="card-header">
+
+        <a href="/post/{{id}}">{{title}}</a>
+        <p class="card-text">Posted by {{user.username}} on {{format_date created_at}}
+      </div>
+      <div class="card-body ">
+        <h5 class="card-title">{{content}}</a></h5>
+
+        {{comments.length}} comment(s) {{like_count.length}}
+        </p>
+      </div>
     </div>
   </div>
-</div>
-</div>
+  </div>
+</section>
 <script src="/javascript/like.js"></script>
-
-
- 
- 
