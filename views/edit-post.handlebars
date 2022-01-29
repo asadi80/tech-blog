@@ -1,4 +1,4 @@
-const moment = require('moment');
+
 <div>
   <a href="/dashboard" class="btn btn-outline-primary"> &larr; Back to dashboard</a>
   <h2>
@@ -7,27 +7,19 @@ const moment = require('moment');
   <form class="edit-post-form">
     <div>
       <input name="post-title" type="text" value="{{post.title}}" />
-      <span>({{ post.content}})</span>
+      <input class="form-control" placeholder="" id="floatingTextarea" type="text" value="{{post.content}}" name="content">
+     
     </div>
     <div>
       {{post.like_count}} {{  post.like_count}} by you on {{format_date post.created_at}}
       |
       <a href="/post/{{post.id}}">{{post.comments.length}} </a>
     </div>
-    <button type="submit" class="btn btn-outline-success">Save post</button>
+    <button type="submit" class="btn btn-outline-success">Update post</button>
     <button type="button" class="delete-post-btn btn-outline-danger">Delete post</button>
   </form>
 </div>
 
-<form class="comment-form">
-  <div class="form-floating">
-    <textarea class="form-control" name="comment-body"></textarea>
-  </div>
-
-  <div>
-    <button type="submit" class="btn btn-outline-primary">add comment</button>
-  </div>
-</form>
 
 {{> comments post.comments}}
 
