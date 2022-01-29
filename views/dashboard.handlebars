@@ -1,0 +1,43 @@
+
+<div class="container">
+  <div class="row justify-content-md-center">
+<div class="card shadow-sm p-3 mb-5 bg-body rounded border-info mb-3" style="max-width: 40rem; margin-left:20px;">
+  <div class="card-header"><h2>Create New Post</h2></div>
+  <div class="card-body">
+   <form class="new-post-form">
+    <div>
+      <label for="post-title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="post-title" name="post-title" />
+    </div>
+    <div>
+      <label for="content" class="form-label">Content</label>
+     
+
+    <textarea class="form-control" placeholder="" id="floatingTextarea" name="content"></textarea>
+ 
+
+
+    </div>
+    <button type="submit" class="btn btn-outline-primary mt-3 bottom-0 end-0">Create</button>
+  </form>
+  </div>
+</div>
+</div>
+
+{{#if posts.length}}
+<section>
+  <h2 style="text-align: center;">Your Posts</h2>
+  <ul>
+    {{#each posts as |post|}}
+    <li>
+      <div>
+      {{> post-info post}}
+      <a href="/dashboard/edit/{{post.id}}" >Edit post</a>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+{{/if}}
+
+<script src="/javascript/add-post.js"></script>

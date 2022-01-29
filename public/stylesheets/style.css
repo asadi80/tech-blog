@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
 }
 
@@ -133,12 +133,12 @@ main {
   margin: -1.5% 0 2% 0;
 }
 
-.upvote-btn {
+.liked-btn {
   background-color: #197d0f;
   transition: background-color .1s;
 }
 
-.upvote-btn:hover {
+.liked-btn:hover {
   background-color: #1f9c13;
 }
 
@@ -166,13 +166,28 @@ main {
 }
 
 .edit-post-form {
-  margin-bottom: 5%;
+  margin-bottom: 5%; 
 }
+  */
+  *{
+   
+    font-family: 'Nova Slim', cursive;
+    
 
-footer {
-  border-top: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  padding: 1%;
-  font-size: 110%;
-}
+  }
+  body {
+    height: 100%;
+    position: relative;
+   }
+
+
+  footer {
+    position: relative;
+    bottom:0;
+    width:100%;
+    height:70px;   /* Height of the footer */
+   
+ }
+ ul, li{
+   list-style: none;
+ }

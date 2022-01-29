@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Post, User, Like, Comment} = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // GET /api/posts
 router.get('/', (req, res) => {
   Post.findAll({
     attributes: [
       'id',
-      'post_url',
+      'content',
       'title',
       'created_at',
      
@@ -44,10 +45,10 @@ router.get('/:id', (req, res) => {
     },
     tributes: [
       'id',
-      'post_url',
+      'content',
       'title',
       'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
+   
     ],
     include: [
       {
@@ -72,11 +73,11 @@ router.get('/:id', (req, res) => {
 });
 // POST /api/posts
 router.post('/', (req, res) => {
-  // expects {title: 'Lernantino', post_url: 'www.uc.com',user_id:number}
+  // expects {title: 'Lernantino', content: 'www.uc.com',user_id:number}
   Post.create({
     title: req.body.title,
-    post_url: req.body.post_url,
-    user_id: req.body.user_id,
+    content: req.body.content,
+    user_id: req.session.user_id
   })
     .then(postData => res.json(postData))
     .catch(err => {
@@ -87,13 +88,16 @@ router.post('/', (req, res) => {
 
 // PUT /api/posts/likeed
 router.put('/liked', (req, res) => {
-  // custom static method created in models/Post.js
-  Post.liked(req.body, { Like, Comment, User })
-    .then(updatedPostData => res.json(updatedPostData))
-    .catch(err => {
-      console.log(err);
-      res.status(400).json(err);
-    });
+  // make sure the session exists first
+  if (req.session) {
+    // pass session id along with all destructured properties on req.body
+    Post.liked({ ...req.body, user_id: req.session.user_id }, { Like, Comment, User })
+      .then(updatedLikeData => res.json(updatedLikeData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
 });
 
 // PUT /api/posts/1
@@ -101,7 +105,11 @@ router.put('/:id', (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
   // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
-  Post.update(req.body, {
+  Post.update(req.body, 
+    {
+      title: req.body.title
+    },
+    {
     where: {
       id: req.params.id
     }
