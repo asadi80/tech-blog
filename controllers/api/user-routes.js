@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Like } = require('../../models');
+const { User, Post,Comment } = require('../../models');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -38,8 +38,7 @@ router.get('/:id', (req, res) => {
       {
         model: Post,
         attributes: ['title'],
-        through: Like,
-        as: 'liked_posts'
+        
       }
     ]
   })

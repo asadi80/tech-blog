@@ -34,12 +34,12 @@
               <div class="card-header">
 
                 <a href="/post/{{id}}">{{title}}</a>
-                <p class="card-text">Posted by {{user.username}} on {{format_date created_at}}
+                <p class="card-text">Posted by {{user.username}} on {{format_date created_at}} </p>
               </div>
               <div class="card-body ">
                 <h5 class="card-title">{{content}}</a></h5>
-                {{comments.length}} comment(s) {{like_count.length}} <a href="/dashboard/edit/{{post.id}}">Edit post</a>
-                </p>
+                {{comments.length}} comment(s) <a href="/dashboard/edit/{{post.id}}">Edit post</a>
+               
               </div>
             </div>
           </div>

@@ -1,28 +1,31 @@
-
-<div>
-  <a href="/dashboard" class="btn btn-outline-primary"> &larr; Back to dashboard</a>
-  <h2>
-    Edit Post
-  </h2>
-  <form class="edit-post-form">
-    <div>
-      <input name="post-title" type="text" value="{{post.title}}" />
-      <input class="form-control" placeholder="" id="floatingTextarea" type="text" value="{{post.content}}" name="content">
-     
+<section>
+  <div class="container" style=" margin-bottom:362px;">
+    <div class="row justify-content-md-center">
+      <div class="card shadow-sm p-3 mb-5 bg-body rounded border-info mb-3" style="max-width: 40rem; margin-left:20px;">
+        <div class="card-header">
+          <h2>Edit Post</h2>
+        </div>
+        <div class="card-body">
+          <form class="new-post-form">
+            <div>
+              <label for="form-control" class="form-label">Title:</label>
+              <input name="post-title" type="text" class="form-control mb-1" value="{{post.title}}" />
+              <label for="form-control" class="form-label">Content:</label>
+              <input class="form-control mb-1" name="content" id="floatingTextarea" type="text" value="{{post.content}}"
+                name="content">
+            </div>
+            <div class="mb-1">
+             by you on {{format_date post.created_at}}
+            </div>
+            <button type="submit" class="edit-post-form btn btn-outline-success">Update post</button>
+            <button type="button" class="delete-post-btn btn btn-outline-danger">Delete post</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div>
-      {{post.like_count}} {{ post.like_count}} by you on {{format_date post.created_at}}
-      |
-      <a href="/post/{{post.id}}">{{post.comments.length}} </a>
-    </div>
-    <button type="submit" class="btn btn-outline-success">Update post</button>
-    <button type="button" class="delete-post-btn btn-outline-danger">Delete post</button>
-  </form>
-</div>
-
-
-{{> comments post.comments}}
+  <div>
+</section>
 
 <script src="/javascript/edit-post.js"></script>
 <script src="/javascript/delete-post.js"></script>
-<script src="/javascript/comment.js"></script>
+{{!-- <script src="/javascript/comment.js"></script> --}}

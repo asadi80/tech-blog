@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Post, User, Comment,  } = require('../models');
+const { Post, User, Comment  } = require('../models');
 const withAuth = require('../utils/auth');
 router.get('/',withAuth,(req, res) => {
     Post.findAll({
       where: {
-        // use the ID from the session
         user_id: req.session.user_id
       },
       attributes: [
@@ -13,7 +12,6 @@ router.get('/',withAuth,(req, res) => {
         'content',
         'title',
         'created_at',
-        // [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
       ],
       include: [
         {
@@ -31,7 +29,7 @@ router.get('/',withAuth,(req, res) => {
       ]
     })
       .then(postData => {
-        // serialize data before passing to template
+    
         const posts = postData.map(post => post.get({ plain: true }));
         res.render('dashboard', { posts, loggedIn: true });
       })
@@ -47,7 +45,6 @@ router.get('/',withAuth,(req, res) => {
         'content',
         'title',
         'created_at',
-        // [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
       ],
       include: [
         {
@@ -80,6 +77,9 @@ router.get('/',withAuth,(req, res) => {
         res.status(500).json(err);
       });
   });
+  router.get('/new', (req, res) => {
+    res.render('new-post');
+});
   
 
 module.exports = router;

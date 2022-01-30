@@ -1,9 +1,11 @@
 async function likeClickHandler(event) {
     event.preventDefault();
+    
 
     const id = window.location.toString().split('/')[
       window.location.toString().split('/').length - 1
     ];
+    console.log(id);
   
     const response = await fetch('/api/posts/liked/', {
         method: 'PUT',
@@ -22,4 +24,4 @@ async function likeClickHandler(event) {
       }
   }
   
-  document.querySelector('.like-btn').addEventListener('click', likeClickHandler);
+  document.querySelector('.like-btn').addEventListener('click', likeClickHandler, false);

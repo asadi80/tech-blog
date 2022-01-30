@@ -8,14 +8,16 @@
     font-family: 'Nova Slim', cursive;
     padding: 0px;
     margin: 0px;
+    height: 100%;
    }
 
 
   footer {
     position: relative;
     bottom:0;
-    width:100%;
+    flex-shrink: 0;
     height:70px;   
+    
  }
  
  li{

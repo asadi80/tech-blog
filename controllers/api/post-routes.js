@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Like, Comment} = require('../../models');
+const { Post, User, Comment} = require('../../models');
 const withAuth = require('../../utils/auth');
-
+// ----------------------------------------------------------------------------------------------------------------------------------------
 // GET /api/posts
 router.get('/', (req, res) => {
   Post.findAll({
@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
       'content',
       'title',
       'created_at',
-     
     ],
     order: [['created_at', 'DESC']],
     include: [
@@ -36,6 +35,7 @@ router.get('/', (req, res) => {
     });
 
 });
+// ----------------------------------------------------------------------------------------------------------------------------------------
 
 // GET /api/posts/by id
 router.get('/:id', (req, res) => {
@@ -48,7 +48,6 @@ router.get('/:id', (req, res) => {
       'content',
       'title',
       'created_at',
-   
     ],
     include: [
       {
@@ -71,9 +70,11 @@ router.get('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
 // POST /api/posts
-router.post('/', (req, res) => {
-  // expects {title: 'Lernantino', content: 'www.uc.com',user_id:number}
+router.post('/',withAuth, (req, res) => {
+  
   Post.create({
     title: req.body.title,
     content: req.body.content,
@@ -85,29 +86,16 @@ router.post('/', (req, res) => {
       res.status(500).json(err);
     });
 });
-
-// PUT /api/posts/likeed
-router.put('/liked', (req, res) => {
-  // make sure the session exists first
-  if (req.session) {
-    // pass session id along with all destructured properties on req.body
-    Post.liked({ ...req.body, user_id: req.session.user_id }, { Like, Comment, User })
-      .then(updatedLikeData => res.json(updatedLikeData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  }
-});
+// ----------------------------------------------------------------------------------------------------------------------------------------
 
 // PUT /api/posts/1
-router.put('/:id', (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-
-  // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
-  Post.update(req.body, 
+router.put('/:id',withAuth, (req, res) => {
+ 
+  Post.update( 
     {
-      title: req.body.title
+      title: req.body.title,
+      content: req.body.content,
+      
     },
     {
     where: {
@@ -115,7 +103,7 @@ router.put('/:id', (req, res) => {
     }
   })
     .then(postData => {
-      if (!postData[0]) {
+      if (!postData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
@@ -126,9 +114,10 @@ router.put('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+// ----------------------------------------------------------------------------------------------------------------------------------------
 
 // DELETE /api/posts/1
-router.delete('/:id', (req, res) => {
+router.delete('/:id',withAuth, (req, res) => {
   Post.destroy({
     where: {
       id: req.params.id

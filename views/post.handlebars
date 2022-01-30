@@ -1,20 +1,39 @@
 {{> post-info post}}
 {{#if loggedIn}}
-<form class="comment-form">
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card shadow-sm p-3 mb-5 bg-body rounded border-info mb-3" style="max-width: 40rem; margin-left:20px;">
+      <div class="card-body">
+        <form class="new-post-form">
+          <div>
+            <label for="content" class="form-label">add comment</label>
+            <textarea class="form-control mb-1" placeholder="" id="floatingTextarea" name="comment-body"></textarea>
+          </div>
+          <div>
+            <button type="submit" class="comment-form btn btn-outline-info">add comment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </form>
+  {{/if}}
   <div>
-    <textarea name="comment-body"></textarea>
+    <div class="container ">
+      <div class="row justify-content-md-center">
+        <div class="card shadow-sm p-3 mb-1 bg-body rounded border-info" style=" margin-top:5px ;">
+          <div class="card-header">
+            <h5>Comments</h5>
+          </div>
+          <div class="card-body ">
+            {{> comments post.comments}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <button type="submit" class="btn btn-outline-primary">add comment</button>
-    <img class="like-btn " src="/image/like.png" alt="">
-  </div>
-</form>
-{{/if}}
-
-{{> comments post.comments}}
-
-{{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
-<script src="/javascript/like.js"></script>
-{{/if}}
+  {{#if loggedIn}}
+  <script src="/javascript/comment.js"></script>
+  
+  {{/if}}
