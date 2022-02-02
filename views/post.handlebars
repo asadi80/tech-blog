@@ -2,7 +2,7 @@
 {{#if loggedIn}}
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card shadow-sm p-3 mb-5 bg-body rounded border-info mb-3" style="max-width: 40rem; margin-left:20px;">
+    <div class="card shadow-sm p-3 mb-3 bg-body rounded  mb-3" style="max-width: 40rem; margin-left:20px;">
       <div class="card-body">
         <form class="new-post-form">
           <div>
@@ -10,7 +10,7 @@
             <textarea class="form-control mb-1" placeholder="" id="floatingTextarea" name="comment-body"></textarea>
           </div>
           <div>
-            <button type="submit" class="comment-form btn btn-outline-info">add comment</button>
+            <button type="submit" class="comment-form btn btn-outline-info"><img src="/image/add-message.png" alt=""></button>
           </div>
         </form>
       </div>
@@ -21,10 +21,11 @@
   <div>
     <div class="container ">
       <div class="row justify-content-md-center">
-        <div class="card shadow-sm p-3 mb-1 bg-body rounded border-info" style=" margin-top:5px ;">
-          <div class="card-header">
+        <div class="card shadow-sm p-3 mb-1 bg-body rounded" style=" margin-top:5px ;">
+          <div>
             <h5>Comments</h5>
           </div>
+          <hr>
           <div class="card-body ">
             {{> comments post.comments}}
           </div>

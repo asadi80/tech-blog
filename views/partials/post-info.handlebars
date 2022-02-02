@@ -1,19 +1,18 @@
 <section>
-  <div class="container ">
+  <div class="container mt-3">
     <div class="row justify-content-md-center">
-    <div class="card shadow-sm p-3 mb-1 bg-body rounded border-info" style=" margin-top:5px ;">
-      <div class="card-header">
-
-        <a href="/post/{{id}}">{{title}}</a>
-        <p class="card-text">Posted by {{user.username}} on {{format_date created_at}}
-      </div>
-      <div class="card-body ">
-        <h5 class="card-title">{{content}}</a></h5>
-
-        {{comments.length}} comment(s) 
-        </p>
+      <div class="card shadow-sm p-3 mb-1 bg-body rounded" style=" margin-top:5px ;">
+        <div>
+          <h3> <a class="link-info" href="/post/{{id}}">{{title}}</a> </h3>
+          <hr>
+          <p class="card-text">Posted by {{user.username}} on {{format_date created_at}}
+        </div>
+        <div class="card-body ">
+          <h5 class="card-title">{{content}}</a></h5>
+          {{comments.length}} comment(s)
+          </p>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </section>

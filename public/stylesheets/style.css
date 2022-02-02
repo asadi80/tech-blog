@@ -1,41 +1,36 @@
- * {
+* {
   box-sizing: border-box;
 }
-
-
-
-  body, html {
-    font-family: 'Nova Slim', cursive;
-    padding: 0px;
-    margin: 0px;
-    height: 100%;
-   }
-
-
-  footer {
-    position: relative;
-    bottom:0;
-    flex-shrink: 0;
-    height:70px;   
-    
- }
- 
- li{
-  list-style: none;
- 
+html {
+  height: 100%;
+}
+body {
+  font-family: "Nova Slim", cursive;
+  padding: 0px;
+  margin: 0px;
 }
 
-ul
- {
+li {
   list-style: none;
+}
 
- }
- .img{
-   text-align: center;
+ul {
+  list-style: none;
+  
+}
+
+.img {
+  text-align: center;
   vertical-align: middle;
   padding-top: 8px;
- }
+}
 
- .container{
- position: relative;
- }
+#glowin {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,4 +1,6 @@
-# tech-blogYour Task
+# tech-blogYour 
+
+## Task
 Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
 
 ## User Story
@@ -45,7 +47,7 @@ The following animation demonstrates the application functionality:
 ![14-mvc-homework-demo-01](https://user-images.githubusercontent.com/89751266/151684778-4719992d-6f0c-4907-88a3-ae182c87bd6d.gif)
 
 ## Screenshot
-
+![Screenshot (28)](https://user-images.githubusercontent.com/89751266/152235124-73222870-344f-4bea-90ff-817e6e56ccd2.png)
 
 ## Demo
 The following video shows an example of the application being used from the command line:
@@ -66,10 +68,12 @@ Start Server;
 npm run start 
 
 ## Built With
-
-* Node js
-* Javascriptt
-* SQL
+* mysql 
+* handlebars 
+* sequelize 
+* mvc-framework 
+* express-session 
+* jawsdb
 
 ## You can reach me on
 [![317725_linkedin_social_icon](https://user-images.githubusercontent.com/89751266/140631331-e97c3a6d-52f7-4d12-b38f-33ca5a2fad7d.png)][1]

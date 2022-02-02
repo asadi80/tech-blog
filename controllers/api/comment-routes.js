@@ -3,18 +3,14 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-  Comment.findAll({
-    where: {
-        id: req.params.id
-    }
-})
+  Comment.findAll({})
   .then(commentData => res.json(commentData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
   });
 });
-
+// ------------------------------------------------------------------------------------------------------------
 router.post('/',withAuth, (req, res) => {
   // check the session
   if (req.session) {
@@ -31,6 +27,7 @@ router.post('/',withAuth, (req, res) => {
       });
   }
 });
+// ------------------------------------------------------------------------------------------------------------
 
 router.delete('/:id',withAuth, (req, res) => {
     Comment.destroy({

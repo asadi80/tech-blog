@@ -38,6 +38,8 @@ router.get('/',withAuth,(req, res) => {
         res.status(500).json(err);
       });
   });
+  // ------------------------------------------------------------------------------------------------------------
+
   router.get('/edit/:id', withAuth, (req, res) => {
     Post.findByPk(req.params.id, {
       attributes: [
@@ -64,7 +66,6 @@ router.get('/',withAuth,(req, res) => {
       .then(postData => {
         if (postData) {
           const post = postData.get({ plain: true });
-          
           res.render('edit-post', {
             post,
             loggedIn: true
@@ -77,8 +78,9 @@ router.get('/',withAuth,(req, res) => {
         res.status(500).json(err);
       });
   });
-  router.get('/new', (req, res) => {
-    res.render('new-post');
+  // -----------------------------------------------------------------------------------------------
+  router.get('/new-post', (req, res) => {
+    res.render('create-new-post');
 });
   
 
