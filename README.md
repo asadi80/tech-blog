@@ -51,21 +51,19 @@ The following animation demonstrates the application functionality:
 
 ## Demo
 The following video shows an example of the application being used from the command line:
+https://watch.screencastify.com/v/Z8DB12FyDbwOMMe0kwUk
 
+## On Heruko
+[Tech Blog](https://tech-bloog.herokuapp.com/)
 
 
 ## Usage:
-
 Clone the repo, navigate to the root folder, run the following commands from the CLI:
 
-Run Test;
-npm i
-
-Seed DB;
-npm run seed
-
-Start Server;
-npm run start 
+* npm i
+* npm run seed
+* Start Server;
+* npm run start 
 
 ## Built With
 * mysql 
