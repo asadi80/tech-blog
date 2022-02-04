@@ -62,7 +62,7 @@ Clone the repo, navigate to the root folder, run the following commands from the
 
 * npm i
 * npm run seed
-* Start Server;
+
 * npm run start 
 
 ## Built With
